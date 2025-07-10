@@ -1,0 +1,325 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Mobile-optimized Matchbox color scheme */
+  --background: hsl(180, 50%, 98%);
+  --foreground: hsl(180, 20%, 10%);
+  --muted: hsl(180, 30%, 95%);
+  --muted-foreground: hsl(180, 10%, 45%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(180, 20%, 10%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(180, 20%, 10%);
+  --border: hsl(180, 20%, 88%);
+  --input: hsl(180, 20%, 92%);
+  --primary: hsl(175, 100%, 25%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(51, 100%, 50%);
+  --secondary-foreground: hsl(180, 100%, 15%);
+  --accent: hsl(51, 100%, 50%);
+  --accent-foreground: hsl(180, 100%, 15%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(175, 100%, 25%);
+  --radius: 0.75rem;
+  
+  /* Mobile-specific variables */
+  --mobile-header-height: 60px;
+  --mobile-nav-height: 70px;
+  --mobile-safe-area-top: env(safe-area-inset-top);
+  --mobile-safe-area-bottom: env(safe-area-inset-bottom);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    /* Prevent zoom on inputs */
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  body {
+    @apply bg-teal-50 text-foreground font-sans;
+    /* Mobile-first optimizations */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* Full height for mobile */
+    min-height: 100vh;
+    min-height: 100dvh;
+    /* Safe area support for iOS */
+    padding-top: var(--mobile-safe-area-top);
+    padding-bottom: var(--mobile-safe-area-bottom);
+  }
+  
+  /* Mobile-optimized input and button styles */
+  input, textarea, button {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+  
+  /* Remove iOS Safari input shadows and styling */
+  input[type="text"], 
+  input[type="password"], 
+  input[type="email"], 
+  textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.75rem;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  /* Mobile-optimized button touch targets */
+  button, 
+  .btn, 
+  [role="button"] {
+    min-height: 44px; /* iOS recommended touch target */
+    min-width: 44px;
+  }
+  
+  /* Remove webkit tap highlights */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Mobile scrolling optimization */
+  .scroll-smooth {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@layer components {
+  /* Mobile layout container */
+  .mobile-app {
+    @apply flex flex-col h-screen;
+    height: 100vh;
+    height: 100dvh;
+  }
+  
+  /* Mobile header */
+  .mobile-header {
+    @apply bg-teal-600 text-white px-4 py-3 shadow-lg;
+    height: var(--mobile-header-height);
+    @apply flex items-center justify-between;
+  }
+  
+  /* Mobile content area */
+  .mobile-content {
+    @apply flex-1 overflow-y-auto bg-teal-50 p-4;
+    padding-bottom: calc(var(--mobile-nav-height) + 1rem);
+  }
+  
+  /* Mobile bottom navigation */
+  .mobile-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-white border-t border-teal-200;
+    height: var(--mobile-nav-height);
+    @apply flex items-center justify-around shadow-2xl;
+    padding-bottom: var(--mobile-safe-area-bottom);
+  }
+  
+  /* Mobile navigation item */
+  .nav-item {
+    @apply flex flex-col items-center justify-center p-2 rounded-xl transition-all duration-200;
+    @apply text-gray-500 active:scale-95;
+    min-width: 60px;
+    min-height: 50px;
+  }
+  
+  .nav-item.active {
+    @apply text-teal-600 bg-teal-50;
+  }
+  
+  .nav-item:active {
+    @apply scale-95;
+  }
+  
+  /* Mobile card component */
+  .mobile-card {
+    @apply bg-white rounded-xl shadow-sm border border-teal-100 p-4 mb-4;
+    @apply active:scale-[0.98] transition-transform duration-150;
+  }
+  
+  /* Mobile button styles */
+  .btn-primary {
+    @apply bg-teal-600 hover:bg-teal-700 active:bg-teal-800 text-white rounded-xl px-6 py-3 font-semibold;
+    @apply shadow-lg active:scale-95 transition-all duration-150;
+    min-height: 48px;
+  }
+  
+  .btn-secondary {
+    @apply bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-gray-900 rounded-xl px-6 py-3 font-semibold;
+    @apply shadow-lg active:scale-95 transition-all duration-150;
+    min-height: 48px;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent hover:bg-teal-50 active:bg-teal-100 text-teal-600 rounded-xl px-4 py-2;
+    @apply active:scale-95 transition-all duration-150;
+    min-height: 44px;
+  }
+  
+  /* Mobile form inputs */
+  .input-mobile {
+    @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-teal-500;
+    @apply focus:ring-2 focus:ring-teal-200 transition-all bg-white;
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 48px;
+  }
+  
+  /* Mobile-optimized spacing */
+  .mobile-container {
+    @apply px-4 py-6 max-w-sm mx-auto;
+  }
+  
+  .mobile-section {
+    @apply mb-6;
+  }
+  
+  /* Mobile status indicators */
+  .status-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .status-tradeable {
+    @apply bg-green-100 text-green-800;
+  }
+  
+  .status-collected {
+    @apply bg-blue-100 text-blue-800;
+  }
+  
+  .status-missing {
+    @apply bg-gray-100 text-gray-800;
+  }
+  
+  /* Mobile figurine card */
+  .figurine-card {
+    @apply bg-white rounded-xl p-3 shadow-sm border border-teal-100;
+    @apply active:scale-95 transition-transform duration-150;
+  }
+  
+  /* Mobile list item */
+  .mobile-list-item {
+    @apply flex items-center p-4 bg-white rounded-xl mb-2 shadow-sm border border-teal-100;
+    @apply active:scale-[0.98] transition-transform duration-150;
+  }
+  
+  /* Mobile floating action button */
+  .fab {
+    @apply fixed bottom-20 right-4 w-14 h-14 bg-teal-600 text-white rounded-full;
+    @apply flex items-center justify-center shadow-2xl active:scale-90 transition-transform;
+    z-index: 1000;
+  }
+  
+  /* Mobile modal/overlay */
+  .mobile-modal {
+    @apply fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end;
+  }
+  
+  .mobile-modal-content {
+    @apply bg-white rounded-t-3xl p-6 w-full max-h-[90vh] overflow-y-auto;
+    @apply transform transition-transform duration-300;
+  }
+  
+  /* Mobile swipe indicator */
+  .swipe-indicator {
+    @apply w-12 h-1 bg-gray-300 rounded-full mx-auto mb-4;
+  }
+  
+  /* Mobile grid layouts */
+  .mobile-grid-2 {
+    @apply grid grid-cols-2 gap-3;
+  }
+  
+  .mobile-grid-3 {
+    @apply grid grid-cols-3 gap-2;
+  }
+  
+  /* Mobile typography */
+  .mobile-title {
+    @apply text-xl font-bold text-teal-800 mb-2;
+  }
+  
+  .mobile-subtitle {
+    @apply text-sm font-medium text-gray-600 mb-1;
+  }
+  
+  .mobile-body {
+    @apply text-sm text-gray-700 leading-relaxed;
+  }
+  
+  /* Mobile loading states */
+  .mobile-loading {
+    @apply animate-pulse bg-gray-200 rounded;
+  }
+  
+  /* Mobile empty states */
+  .mobile-empty {
+    @apply flex flex-col items-center justify-center py-12 text-center;
+  }
+  
+  /* Mobile search bar */
+  .mobile-search {
+    @apply relative mb-4;
+  }
+  
+  .mobile-search input {
+    @apply w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-teal-500;
+    @apply focus:ring-2 focus:ring-teal-200 bg-white;
+    font-size: 16px;
+  }
+  
+  .mobile-search .search-icon {
+    @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400;
+  }
+}
+
+/* Mobile-specific animations */
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+.animate-slide-in-up {
+  animation: slideInUp 0.3s ease-out;
+}
+
+.animate-slide-out-down {
+  animation: slideOutDown 0.3s ease-in;
+}
+
+/* PWA specific styles */
+@media (display-mode: standalone) {
+  body {
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+}

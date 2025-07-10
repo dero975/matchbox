@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(183, 100%, 25%);
+  --primary-foreground: hsl(60, 9.1%, 97.8%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(51, 100%, 50%);
+  --accent-foreground: hsl(183, 100%, 15%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* MATCHBOX custom colors */
+  --teal-primary: hsl(180, 100%, 25%);
+  --teal-dark: hsl(180, 100%, 20%);
+  --teal-light: hsl(180, 100%, 30%);
+  --yellow-accent: hsl(51, 100%, 50%);
+  --yellow-light: hsl(51, 100%, 70%);
+  --cream: hsl(60, 56%, 91%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(183, 100%, 25%);
+  --primary-foreground: hsl(60, 9.1%, 97.8%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(51, 100%, 50%);
+  --accent-foreground: hsl(183, 100%, 15%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    background: var(--teal-primary);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .matchbox-gradient {
+    background: linear-gradient(135deg, var(--teal-primary) 0%, var(--teal-dark) 100%);
+  }
+  
+  .matchbox-card {
+    @apply bg-white rounded-2xl shadow-lg border-2;
+    border-color: hsl(183, 100%, 25% / 0.1);
+  }
+  
+  .matchbox-button {
+    @apply bg-accent text-accent-foreground font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg;
+  }
+  
+  .matchbox-button:hover {
+    background-color: hsl(45, 93%, 47% / 0.9);
+  }
+  
+  .matchbox-button-secondary {
+    @apply bg-white hover:bg-gray-50 text-primary font-semibold py-3 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg border-2;
+    border-color: hsl(183, 100%, 25% / 0.2);
+  }
+  
+  .matchbox-input {
+    @apply w-full px-4 py-4 rounded-xl border-2 focus:border-accent focus:outline-none text-lg;
+    border-color: hsl(183, 100%, 25% / 0.2);
+  }
+  
+  .matchbox-input:focus {
+    border-color: hsl(45, 93%, 47%);
+  }
+  
+  .lightning-icon {
+    color: var(--yellow-accent);
+    filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.3));
+  }
+  
+  .card-shadow {
+    box-shadow: 0 4px 15px rgba(0, 128, 128, 0.1);
+  }
+  
+  .trading-card {
+    @apply rounded-xl overflow-hidden shadow-md border-2 border-gray-200 hover:border-accent transition-colors;
+  }
+  
+  .status-owned {
+    @apply bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full font-medium;
+  }
+  
+  .status-wanted {
+    @apply bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full font-medium;
+  }
+  
+  .status-double {
+    @apply bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full font-medium;
+  }
+  
+  .match-percentage {
+    @apply bg-gradient-to-r from-accent to-yellow-200 text-primary px-3 py-1 rounded-full font-bold text-sm;
+  }
+  
+  .bottom-nav-item {
+    @apply flex flex-col items-center py-3 px-4 rounded-xl transition-colors;
+  }
+  
+  .bottom-nav-item.active {
+    @apply bg-accent text-accent-foreground;
+  }
+  
+  .bottom-nav-item:not(.active) {
+    @apply text-white/70 hover:text-white hover:bg-white/10;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom animations */
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-bounce-in {
+  animation: bounce-in 0.6s ease-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
